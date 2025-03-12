@@ -4,7 +4,7 @@
 
 
 
----
+
 ## **1. Общая информация**  
 
 **Название проекта:** Docs-to-1C-v1  
@@ -24,7 +24,7 @@
 - **WebSocket**: для отслеживания статуса обработки  
 - **Frontend**: React (с использованием React Router)
 
-![Архитектура проекта](docs/images/ver-03-03 Схема ТЗ в Форма 2.jpg)
+![Архитектура проекта](https://github.com/dev4ox/TZ_recognize_v1/blob/main/docs/images/scheme_1_03_03.jpg)
 
 ## **3. Основные компоненты системы**  
 
