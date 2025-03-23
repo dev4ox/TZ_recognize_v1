@@ -1,0 +1,65 @@
+Project structure
+/TZ_recognize_v1
+│── api/                          # Backend (FastAPI)
+│   │── app/
+│   │   │── routes/               # Маршруты API
+│   │   │   │── __init__.py       # Импорт маршрутов
+│   │   │   │── upload.py         # Эндпоинт загрузки файлов
+│   │   │   │── process.py        # Эндпоинт запуска обработки
+│   │   │   │── result.py         # Эндпоинт получения результатов
+│   │   │   │── websocket.py      # WebSocket для статуса обработки
+│   │   │── services/             # Бизнес-логика приложения
+│   │   │   │── file_service.py   # Обработка файлов (чтение, хеширование)
+│   │   │   │── processing.py     # Разбиение на чанки, генерация эмбеддингов
+│   │   │   │── llm_service.py    # Запросы к LLM (Gemma 2B)
+│   │   │── models/               # Определение схем данных
+│   │   │   │── database.py       # Определение моделей для PostgreSQL
+│   │   │   │── schemas.py        # Pydantic-схемы для API
+│   │   │── workers/              # Очереди задач (Celery)
+│   │   │   │── tasks.py          # Основные задачи Celery (OCR, LLM, генерация Excel)
+│   │   │── utils/                # Вспомогательные функции
+│   │   │   │── hash_utils.py     # Генерация хеша файла
+│   │   │   │── cache.py          # Работа с Redis
+│   │   │   │── embeddings.py     # Работа с векторами (FAISS/Chroma)
+│   │   │── config.py             # Конфигурация (переменные окружения)
+│   │   │── main.py               # Основной файл запуска FastAPI
+│   │   │── celery_worker.py      # Запуск Celery
+│   │── requirements.txt          # Зависимости Python
+│   │── Dockerfile                # Контейнеризация API
+│   │── .env                      # Переменные окружения
+│
+│── frontend/                     # Frontend (React)
+│   │── public/                   # Статические файлы
+│   │── src/
+│   │   │── components/           # UI-компоненты
+│   │   │── pages/                # Страницы
+│   │   │── services/             # API-запросы
+│   │   │── App.js                # Главный компонент
+│   │   │── index.js              # Точка входа React
+│   │── package.json              # Зависимости React
+│   │── vite.config.js            # Конфигурация Vite/Webpack
+│   │── .env                      # Переменные окружения
+│
+│── docs/                         # Документация проекта
+│   │── images/                   # Схемы и графики
+│   │── README.md                 # Основная документация
+│   │── API.md                    # Документация API
+│   │── FRONTEND.md               # Документация Frontend
+│
+│── tests/                        # Тесты (Backend + Frontend)
+│   │── api/                      # Тесты API (pytest)
+│   │── frontend/                 # Тесты Frontend (Jest, React Testing Library)
+│
+│── docker-compose.yml            # Контейнеризация проекта
+│── .gitignore                    # Игнорируемые файлы
+│── README.md                     # Документация проекта
+
+URL endpoints
+/api/v1/docs-processing/
+├── upload/                   [POST]   # Загрузка документа
+├── process/                  [POST]   # Запуск обработки документа
+├── status/                   [GET]    # Получение статуса обработки
+├── result/                   [GET]    # Получение обработанного файла
+├── history/                  [GET]    # Получение списка обработанных файлов
+├── delete/                   [DELETE] # Удаление файла из системы
+├── ws/status                 [WS]     # WebSocket для отслеживания статуса обработки
